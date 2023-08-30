@@ -8,7 +8,10 @@ export default function Footer() {
   }
   return (
     <div className="bg-dark p-3">
-      <p className="small text-white text-center mx-auto" onClick={goToLegal}>
+      <p
+        className="small text-white text-center mx-auto my-0"
+        onClick={goToLegal}
+      >
         Mentions légales
       </p>
     </div>
