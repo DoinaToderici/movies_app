@@ -28,7 +28,7 @@ export default function Connexion() {
 
   return (
     <div className="text-center">
-      <h1>Bonjour</h1>
+      <h1>Bonjour 🤗</h1>
       <h3>Connectez-vous</h3>
       <button
         className="btn btn-success col-3 mx-auto mt-4"
