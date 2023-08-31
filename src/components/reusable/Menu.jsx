@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
 export default function Menu() {
-  const { isLogged, handleLogout } = useContext(UserContext);
+  const { isLogged, handleLogOut } = useContext(UserContext);
   return (
     <div
       className="bg-warning py-3"
@@ -30,7 +30,7 @@ export default function Menu() {
               <Link
                 className="text-white"
                 onClick={() => {
-                  handleLogout();
+                  handleLogOut();
                 }}
               >
                 Deconnexion
@@ -38,8 +38,8 @@ export default function Menu() {
             </li>
           ) : (
             <li className="nav-item">
-              <Link to="/login" className="text-white">
-                Connexion
+              <Link to="/conection/registration" className="text-white">
+                Conection
               </Link>
             </li>
           )}
