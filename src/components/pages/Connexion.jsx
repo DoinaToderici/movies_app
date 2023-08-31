@@ -1,10 +1,6 @@
-import React, { useContext } from "react";
+import React, { useRef, useContext, useState, useEffect } from "react";
 import { LoginContext } from "../../context/LoginContext";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
 
@@ -12,21 +8,51 @@ export default function Connexion() {
   const { login } = useContext(LoginContext);
   const navigation = useNavigate();
 
-  const register = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    console.log(data);
+    connexion(data);
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ name: data.name, id: data.id })
+    );
+  };
+
+  const connexion = (data) =>
+    createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         let user = userCredential.user;
+        console.log(userCredential);
         navigation("/");
       })
       .catch((error) => {
         let errorCode = error.code;
         let errorMessage = error.message;
       });
-  };
 
   return (
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form className="space-y-6" onSubmit={() => register()}>
+      <form className="space-y-6" onSubmit={handleSubmit}>
+        <div>
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium leading-6 text-gray-900"
+          >
+            Name
+          </label>
+          <div className="mt-2">
+            <input
+              id="name"
+              name="name"
+              type="name"
+              autoComplete="name"
+              required
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
         <div>
           <label
             htmlFor="email"
@@ -78,13 +104,4 @@ export default function Connexion() {
       </form>
     </div>
   );
-}
-
-{
-  /* <button
-  className="btn btn-success col-3 mx-auto mt-4"
-  onClick={googleHandler}
->
-  Connexion
-</button> */
 }
