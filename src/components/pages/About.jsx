@@ -4,7 +4,7 @@ import ReactPlayer from "react-player";
 export default function About() {
   return (
     <div>
-      <h1 className="text-center mb-4 text-warning">
+      <h1 className="text-red-600 underline">
         <b>Qui sommes-nous ?</b>
       </h1>
       <div className="row">
