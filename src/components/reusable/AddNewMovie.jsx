@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { db } from "../../config"; // update with your path to firestore config
+import { db } from "../../firebaseConfig"; // update with your path to firestore config
 import { collection, addDoc } from "firebase/firestore";
 import { LoginContext } from "../../context/LoginContext";
 import FormMovie from "./FormMovie";
