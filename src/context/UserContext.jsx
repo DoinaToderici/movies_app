@@ -1,17 +1,25 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../firebaseConfig";
 
 export const UserContext = createContext();
 
 export const UserContextProvider = function ({ children }) {
   const navigate = useNavigate();
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState();
   const [update, setUpdate] = useState(true);
 
-  function login(userDb) {
-    setUser(userDb);
-    localStorage.setItem("login", JSON.stringify(userDb));
-  }
+  const handleAuthentifcation = (data) =>
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        const userDB = userCredential.user;
+        setUser(userDB);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
 
   function isLogged() {
     return user && Object.keys(user).length > 0;
@@ -31,19 +39,17 @@ export const UserContextProvider = function ({ children }) {
     navigate("/login");
   }
 
+  const dataContext = {
+    user,
+    setUser,
+    isLogged,
+    handleLogout,
+    update,
+    setUpdate,
+    handleAuthentifcation,
+  };
+
   return (
-    <UserContext.Provider
-      value={{
-        user,
-        setUser,
-        login,
-        isLogged,
-        handleLogout,
-        update,
-        setUpdate,
-      }}
-    >
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={dataContext}>{children}</UserContext.Provider>
   );
 };

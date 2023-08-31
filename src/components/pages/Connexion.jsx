@@ -5,32 +5,18 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
 
 export default function Connexion() {
-  const { login } = useContext(UserContext);
-  const navigation = useNavigate();
+  const { handleAuthentifcation } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    console.log(data);
-    connexion(data);
+    handleAuthentifcation(data);
     localStorage.setItem(
       "user",
       JSON.stringify({ name: data.name, id: data.id })
     );
   };
-
-  const connexion = (data) =>
-    createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        let user = userCredential.user;
-        console.log(userCredential);
-        navigation("/");
-      })
-      .catch((error) => {
-        let errorCode = error.code;
-        let errorMessage = error.message;
-      });
 
   return (
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
