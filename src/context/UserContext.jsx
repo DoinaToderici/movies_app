@@ -1,9 +1,9 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const LoginContext = createContext();
+export const UserContext = createContext();
 
-export const LoginContextProvider = function ({ children }) {
+export const UserContextProvider = function ({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState("");
   const [update, setUpdate] = useState(true);
@@ -18,7 +18,7 @@ export const LoginContextProvider = function ({ children }) {
   }
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("login");
+    const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       setUser(foundUser);
@@ -32,7 +32,7 @@ export const LoginContextProvider = function ({ children }) {
   }
 
   return (
-    <LoginContext.Provider
+    <UserContext.Provider
       value={{
         user,
         setUser,
@@ -44,6 +44,6 @@ export const LoginContextProvider = function ({ children }) {
       }}
     >
       {children}
-    </LoginContext.Provider>
+    </UserContext.Provider>
   );
 };

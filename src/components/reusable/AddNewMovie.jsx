@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { db } from "../../firebaseConfig"; // update with your path to firestore config
 import { collection, addDoc } from "firebase/firestore";
-import { LoginContext } from "../../context/LoginContext";
+import { UserContext } from "../../context/UserContext";
 import FormMovie from "./FormMovie";
 
 export default function AddNewMovie() {
-  const { update, setUpdate } = useContext(LoginContext);
+  const { update, setUpdate } = useContext(UserContext);
   let valuesAllInputs = { title: "", description: "", country: "", img: "" };
 
   function change(e) {

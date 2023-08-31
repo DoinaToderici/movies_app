@@ -1,11 +1,11 @@
 import React, { useRef, useContext, useState, useEffect } from "react";
-import { LoginContext } from "../../context/LoginContext";
+import { UserContext } from "../../context/UserContext";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
 
 export default function Connexion() {
-  const { login } = useContext(LoginContext);
+  const { login } = useContext(UserContext);
   const navigation = useNavigate();
 
   const handleSubmit = (e) => {

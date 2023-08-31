@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { LoginContext } from "../../context/LoginContext";
+import { UserContext } from "../../context/UserContext";
 
 export default function Menu() {
-  const { isLogged, handleLogout } = useContext(LoginContext);
+  const { isLogged, handleLogout } = useContext(UserContext);
   return (
     <div
       className="bg-warning py-3"

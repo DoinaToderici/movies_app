@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { LoginContext } from "../../context/LoginContext";
+import { UserContext } from "../../context/UserContext";
 import { db } from "../../firebaseConfig"; // update with your path to firestore config
 import {
   collection,
@@ -12,7 +12,7 @@ import FormMovie from "./FormMovie";
 import { Link } from "react-router-dom";
 
 export default function ListMovie() {
-  const { update, setUpdate, isLogged } = useContext(LoginContext);
+  const { update, setUpdate, isLogged } = useContext(UserContext);
   const [listMovie, setListMovie] = useState([]);
 
   // les states for update

@@ -3,18 +3,18 @@ import { Outlet } from "react-router-dom";
 import Footer from "./components/reusable/Footer";
 import Menu from "./components/reusable/Menu";
 import "../src/assets/App.css";
-import { LoginContextProvider } from "./context/LoginContext";
+import { UserContextProvider } from "./context/UserContext";
 function App() {
   return (
-    <LoginContextProvider >
+    <UserContextProvider>
       <div className="page">
-      <Menu />
-      <div className="container py-4">
-        <Outlet />
+        <Menu />
+        <div className="container py-4">
+          <Outlet />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-      </div>
-    </LoginContextProvider>
+    </UserContextProvider>
   );
 }
 
