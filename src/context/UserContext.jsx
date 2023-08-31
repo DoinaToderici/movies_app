@@ -1,16 +1,21 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig";
 
 export const UserContext = createContext();
 
-export const UserContextProvider = function ({ children }) {
+export const UserContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [update, setUpdate] = useState(true);
 
-  const handleAuthentifcation = (data) =>
+  const handleRegistration = (data) => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const userDB = userCredential.user;
@@ -20,6 +25,25 @@ export const UserContextProvider = function ({ children }) {
       .catch((error) => {
         console.log(error.message);
       });
+  };
+
+  const handleLogin = (data) => {
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        const userDB = userCredential.user;
+        setUser(userDB);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  const handleLogOut = () => {
+    setUser({});
+    localStorage.clear();
+    navigate("/conection");
+  };
 
   function isLogged() {
     return user && Object.keys(user).length > 0;
@@ -33,20 +57,16 @@ export const UserContextProvider = function ({ children }) {
     }
   }, []);
 
-  function handleLogout() {
-    setUser({});
-    localStorage.clear();
-    navigate("/login");
-  }
-
   const dataContext = {
     user,
     setUser,
+    handleRegistration,
+    handleLogin,
     isLogged,
-    handleLogout,
+    handleLogOut,
     update,
     setUpdate,
-    handleAuthentifcation,
+    navigate,
   };
 
   return (

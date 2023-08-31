@@ -4,9 +4,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App.jsx";
 import About from "./components/pages/About.jsx";
 import Accueil from "./components/pages/Accueil.jsx";
-import Connexion from "./components/pages/Connexion.jsx";
+import Registration from "./components/pages/Registration.jsx";
 import Legal from "./components/pages/Legal.jsx";
 import Movie from "./components/pages/Movie.jsx";
+import Login from "./components/pages/Login.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -15,7 +16,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route index element={<Accueil />} />
         <Route path="/about" element={<About />} />
         <Route path=":id" element={<Movie />} />
-        <Route path="/login" element={<Connexion />} />
+        <Route path="/conection/registration" element={<Registration />} />
+        <Route path="/conection/login" element={<Login />} />
         <Route path="/legal" element={<Legal />} />
       </Route>
     </Routes>

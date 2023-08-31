@@ -9,6 +9,7 @@ function App() {
     <UserContextProvider>
       <div className="page">
         <Menu />
+
         <div className="container py-4">
           <Outlet />
         </div>
