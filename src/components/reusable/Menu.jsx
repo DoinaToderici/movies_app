@@ -6,7 +6,7 @@ export default function Menu() {
   const { isLogged, handleLogOut } = useContext(UserContext);
   return (
     <div
-      className="bg-warning py-3"
+      className="bg-orange-500  py-3"
       style={{
         position: "sticky",
         top: "0",

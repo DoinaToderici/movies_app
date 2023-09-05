@@ -28,17 +28,15 @@ export default function Login() {
   };
 
   return (
-    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm shadow-xl rounded-sm	bg-orange-50 p-6">
       <FormConnexion onSubmit={handleSubmit} inputsProps={inputsPropsLogin} />
-      <div className="mt-3">
-        <p>
-          Vous dn'avez pas de compte ?{" "}
-          <span
-            className="underline"
-            onClick={() => navigate("/conection/registration")}
-          >
-            Inregistrez-vous 🤗 !
-          </span>
+      <div className="mt-3 text-center">
+        <p>Vous dn'avez pas de compte ? </p>
+        <p
+          className="underline"
+          onClick={() => navigate("/conection/registration")}
+        >
+          Inregistrez-vous 🤗 !
         </p>
       </div>
     </div>

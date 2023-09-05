@@ -32,20 +32,17 @@ export default function Registration() {
   };
 
   return (
-    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm shadow-xl rounded-sm	bg-orange-50 p-6">
       <FormConnexion
         onSubmit={handleSubmit}
         inputsProps={inputsPropsRegistration}
       />
-      <div className="mt-3">
+      <div className="mt-3 text-center">
         <p to="/conection/login">
           Avez vous déjà un compte ?{" "}
-          <span
-            className="underline"
-            onClick={() => navigate("/conection/login")}
-          >
+          <p className="underline" onClick={() => navigate("/conection/login")}>
             Connextez-vous 🤗 !
-          </span>
+          </p>
         </p>
       </div>
     </div>
