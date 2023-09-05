@@ -21,10 +21,7 @@ export default function Login() {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     handleLogin(data);
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ name: data.name, id: data.id })
-    );
+    localStorage.setItem("user", JSON.stringify({ userEmail: data.email }));
   };
 
   return (

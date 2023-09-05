@@ -25,10 +25,7 @@ export default function Registration() {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     handleRegistration(data);
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ name: data.name, id: data.id })
-    );
+    localStorage.setItem("user", JSON.stringify({ userEmail: data.email }));
   };
 
   return (
@@ -38,11 +35,9 @@ export default function Registration() {
         inputsProps={inputsPropsRegistration}
       />
       <div className="mt-3 text-center">
-        <p to="/conection/login">
-          Avez vous déjà un compte ?{" "}
-          <p className="underline" onClick={() => navigate("/conection/login")}>
-            Connextez-vous 🤗 !
-          </p>
+        <p to="/conection/login">Avez vous déjà un compte ? </p>
+        <p className="underline" onClick={() => navigate("/conection/login")}>
+          Connextez-vous 🤗 !
         </p>
       </div>
     </div>

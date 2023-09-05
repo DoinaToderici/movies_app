@@ -1,6 +1,5 @@
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
@@ -29,7 +28,7 @@ export const UserContextProvider = ({ children }) => {
 
   const handleLogin = (data) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         const userDB = userCredential.user;
         setUser(userDB);
         navigate("/");
