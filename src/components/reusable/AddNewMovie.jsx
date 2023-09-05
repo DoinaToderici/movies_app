@@ -24,7 +24,6 @@ export default function AddNewMovie() {
       <div className="my-5 col-8 mx-auto">
         <FormMovie change={change} addMovie={addMovie} />
       </div>
-      <hr className=" border border-3 mb-5" />
     </>
   );
 }
