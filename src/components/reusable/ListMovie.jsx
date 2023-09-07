@@ -7,28 +7,51 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  query,
+  where,
 } from "firebase/firestore";
 import FormMovie from "./FormMovie";
 import { Link } from "react-router-dom";
 
 export default function ListMovie() {
-  const { update, setUpdate, isLogged } = useContext(UserContext);
-  const [listMovie, setListMovie] = useState([]);
-
+  const { update, setUpdate, isLogged, user } = useContext(UserContext);
+  // state get movies
+  const [listAllMovie, setListAllMovie] = useState([]);
+  const [moviesPerSession, setMoviesPerSession] = useState([]);
+  const listMovies = user ? moviesPerSession : listAllMovie;
   // les states for update
   const [idLocal, setIdLocal] = useState();
   const [movieLocal, setMovieLocal] = useState([]);
 
+  // GET  MOVIES PER SESSION
+  useEffect(() => {
+    const getMoviePerSession = async () => {
+      const q = query(
+        collection(db, "movies"),
+        where("userId", "==", user.uid)
+      );
+      const querySnapshot = await getDocs(q);
+      let movies = [];
+      querySnapshot.forEach((doc) => {
+        movies.push(doc.data());
+      });
+      setMoviesPerSession(movies);
+    };
+
+    getMoviePerSession();
+  }, [update]);
+
   // GET ALL MOVIES
   useEffect(() => {
-    const getMovie = async () => {
+    const getAllMovies = async () => {
       const movieSnapshot = await getDocs(collection(db, "movies"));
       const movieList = movieSnapshot.docs.map((doc) => {
         return { ...doc.data(), id: doc.id };
       });
-      setListMovie(movieList);
+      await setListAllMovie(movieList);
     };
-    getMovie();
+
+    getAllMovies();
   }, [update]);
 
   // DELETE MOVIE
@@ -61,14 +84,13 @@ export default function ListMovie() {
   function truncateText(str) {
     return str.length > 100 ? str.substring(0, 100) + "..." : str;
   }
-
   return (
     <div className="row">
-      {listMovie &&
-        listMovie.map((item, key) => {
+      {listMovies &&
+        listMovies.map((item, key) => {
           return (
             <div className="col-4 mb-4" key={key}>
-              {item.id === idLocal ? (
+              {idLocal === item.id ? (
                 <FormMovie change={resetValueForm} addMovie={setUpdatedMovie} />
               ) : (
                 <div className="border border-4 text-center p-3 rounded h-100 d-flex flex-column justify-content-between">

@@ -5,7 +5,7 @@ import { UserContext } from "../../context/UserContext";
 import FormMovie from "./FormMovie";
 
 export default function AddNewMovie() {
-  const { update, setUpdate } = useContext(UserContext);
+  const { update, setUpdate, user } = useContext(UserContext);
   let valuesAllInputs = { title: "", description: "", country: "", img: "" };
 
   function change(e) {
@@ -14,7 +14,12 @@ export default function AddNewMovie() {
 
   function addMovie(e) {
     e.preventDefault();
-    addDoc(collection(db, "movies"), valuesAllInputs);
+
+    addDoc(collection(db, "movies"), {
+      ...valuesAllInputs,
+      userId: user.uid,
+      id: new Date().getUTCMilliseconds(),
+    });
     valuesAllInputs = { title: "", description: "", country: "", img: "" };
     setUpdate(!update);
   }
