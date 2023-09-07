@@ -25,21 +25,23 @@ export default function ListMovie() {
 
   // GET  MOVIES PER SESSION
   useEffect(() => {
-    const getMoviePerSession = async () => {
-      const q = query(
-        collection(db, "movies"),
-        where("userId", "==", user.uid)
-      );
-      const querySnapshot = await getDocs(q);
-      let movies = [];
-      querySnapshot.forEach((doc) => {
-        movies.push(doc.data());
-      });
-      setMoviesPerSession(movies);
-    };
+    if (user) {
+      const getMoviePerSession = async () => {
+        const q = query(
+          collection(db, "movies"),
+          where("userId", "==", user.uid)
+        );
+        const querySnapshot = await getDocs(q);
+        let movies = [];
+        querySnapshot.forEach((doc) => {
+          movies.push(doc.data());
+        });
+        setMoviesPerSession(movies);
+      };
 
-    getMoviePerSession();
-  }, [update]);
+      getMoviePerSession();
+    }
+  }, [update, user]);
 
   // GET ALL MOVIES
   useEffect(() => {
