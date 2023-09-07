@@ -5,7 +5,6 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
-import { IoIosArrowDown } from "react-icons/io";
 
 export default function Reviews() {
   const [reviews, setReviews] = useState();

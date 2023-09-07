@@ -11,10 +11,11 @@ import {
   where,
 } from "firebase/firestore";
 import FormMovie from "./FormMovie";
-import { Link } from "react-router-dom";
+
+import Card from "./Card";
 
 export default function ListMovie() {
-  const { update, setUpdate, isLogged, user } = useContext(UserContext);
+  const { update, setUpdate, user } = useContext(UserContext);
   // state get movies
   const [listAllMovie, setListAllMovie] = useState([]);
   const [moviesPerSession, setMoviesPerSession] = useState([]);
@@ -83,58 +84,20 @@ export default function ListMovie() {
     setIdLocal(0);
   };
 
-  function truncateText(str) {
-    return str.length > 100 ? str.substring(0, 100) + "..." : str;
-  }
   return (
-    <div className="row">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
       {listMovies &&
         listMovies.map((item, key) => {
           return (
-            <div className="col-4 mb-4" key={key}>
+            <div className="min-h-full" key={key}>
               {idLocal === item.id ? (
                 <FormMovie change={resetValueForm} addMovie={setUpdatedMovie} />
               ) : (
-                <div className="border border-4 text-center p-3 rounded h-100 d-flex flex-column justify-content-between">
-                  <div>
-                    <img
-                      src={item.img}
-                      className="w-50 mb-3"
-                      alt={`Image de ${item.title}`}
-                    />
-                    <h2 className="text-warning">{item.title}</h2>
-                    <span className="badge bg-warning mb-3">
-                      {item.country}
-                    </span>
-                    <p className="mb-0">
-                      {truncateText(item.description)}{" "}
-                      <Link to={item.id} className="small text-warning mb-3">
-                        Voir plus
-                      </Link>
-                    </p>
-                  </div>
-
-                  {isLogged() && (
-                    <div className="d-flex justify-content-center">
-                      <button
-                        onClick={() => {
-                          showUpdateForm(item);
-                        }}
-                        className="btn btn-warning py-1 px-2 me-3"
-                      >
-                        Modify
-                      </button>
-                      <button
-                        onClick={() => {
-                          deleteMovie(item);
-                        }}
-                        className="btn btn-danger py-1 px-2"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  )}
-                </div>
+                <Card
+                  item={item}
+                  onDelete={deleteMovie}
+                  updateForm={showUpdateForm}
+                />
               )}
             </div>
           );

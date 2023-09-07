@@ -10,11 +10,8 @@ export default function Accueil() {
     <div>
       {isLogged() && <Popup />}
 
-      <hr className="my-4" />
-
       <ListMovie />
-      <hr className="my-4" />
-      <Reviews />
+      {/* <Reviews /> */}
     </div>
   );
 }
