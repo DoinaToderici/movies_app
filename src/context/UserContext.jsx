@@ -1,5 +1,7 @@
 import {
+  browserSessionPersistence,
   createUserWithEmailAndPassword,
+  setPersistence,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
@@ -27,14 +29,25 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const handleLogin = (data) => {
-    signInWithEmailAndPassword(auth, data.email, data.password)
-      .then(async (userCredential) => {
-        const userDB = userCredential.user;
-        setUser(userDB);
-        navigate("/");
+    setPersistence(auth, browserSessionPersistence)
+      .then(async () => {
+        try {
+          const userCredential = await signInWithEmailAndPassword(
+            auth,
+            data.email,
+            data.password
+          );
+          const userDB = userCredential.user;
+          setUser(userDB);
+          navigate("/");
+        } catch (error) {
+          console.log(error.message);
+        }
       })
       .catch((error) => {
-        console.log(error.message);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage, errorCode);
       });
   };
 
