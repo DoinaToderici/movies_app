@@ -9,6 +9,7 @@ import {
   updateDoc,
   query,
   where,
+  getDoc,
 } from "firebase/firestore";
 import FormMovie from "./FormMovie";
 
@@ -35,11 +36,10 @@ export default function ListMovie() {
         const querySnapshot = await getDocs(q);
         let movies = [];
         querySnapshot.forEach((doc) => {
-          movies.push(doc.data());
+          movies.push({ ...doc.data(), docId: doc.id });
         });
         setMoviesPerSession(movies);
       };
-
       getMoviePerSession();
     }
   }, [update, user]);
@@ -49,7 +49,7 @@ export default function ListMovie() {
     const getAllMovies = async () => {
       const movieSnapshot = await getDocs(collection(db, "movies"));
       const movieList = movieSnapshot.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id };
+        return { ...doc.data(), docId: doc.id };
       });
       await setListAllMovie(movieList);
     };
@@ -59,7 +59,7 @@ export default function ListMovie() {
 
   // DELETE MOVIE
   const deleteMovie = async (movie) => {
-    const movieRef = doc(db, "movies", movie.id);
+    const movieRef = doc(db, "movies", movie.docId);
     await deleteDoc(movieRef);
     setUpdate(!update);
   };

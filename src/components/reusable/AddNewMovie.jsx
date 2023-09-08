@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { db } from "../../firebaseConfig"; // update with your path to firestore config
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc } from "firebase/firestore";
 import { UserContext } from "../../context/UserContext";
 import FormMovie from "./FormMovie";
 
@@ -12,17 +12,17 @@ export default function AddNewMovie() {
     valuesAllInputs[e.target.name] = e.target.value;
   }
 
-  function addMovie(e) {
+  const addMovie = async (e) => {
     e.preventDefault();
-
-    addDoc(collection(db, "movies"), {
+    const docRef = await addDoc(collection(db, "movies"), {
       ...valuesAllInputs,
       userId: user.uid,
-      id: new Date().getUTCMilliseconds(),
+      id: new Date().getMilliseconds(),
     });
+
     valuesAllInputs = { title: "", description: "", country: "", img: "" };
     setUpdate(!update);
-  }
+  };
 
   return (
     <>
