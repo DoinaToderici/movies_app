@@ -10,8 +10,9 @@ export default function Movie() {
   useEffect(() => {
     const getMovie = async () => {
       const movieSnapshot = await getDoc(doc(db, "movies", id));
+
       if (movieSnapshot.exists()) {
-        return setSingleMovie(movieSnapshot.data());
+        setSingleMovie(movieSnapshot.data());
       } else {
         console.log("movie doesn't exist");
       }

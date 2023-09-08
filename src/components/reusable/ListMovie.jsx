@@ -66,7 +66,7 @@ export default function ListMovie() {
 
   // UPDATE MOVIE
   function showUpdateForm(item) {
-    setIdLocal(item.id);
+    setIdLocal(item.docId);
     setMovieLocal(item);
   }
 
@@ -90,7 +90,7 @@ export default function ListMovie() {
         listMovies.map((item, key) => {
           return (
             <div className="min-h-full" key={key}>
-              {idLocal === item.id ? (
+              {idLocal === item.docId ? (
                 <FormMovie change={resetValueForm} addMovie={setUpdatedMovie} />
               ) : (
                 <Card

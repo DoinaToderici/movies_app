@@ -17,7 +17,6 @@ export default function AddNewMovie() {
     const docRef = await addDoc(collection(db, "movies"), {
       ...valuesAllInputs,
       userId: user.uid,
-      id: new Date().getMilliseconds(),
     });
 
     valuesAllInputs = { title: "", description: "", country: "", img: "" };

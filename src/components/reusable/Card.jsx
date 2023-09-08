@@ -27,7 +27,7 @@ export default function Card({ item, onDelete, updateForm }) {
           {/* {item.description && item.description.length > 100 && ( */}
           <>
             <Link
-              to={item.id}
+              to={item.docId}
               className="mb-3 text-xxs hover:cursor-pointer text-gray-300 underline"
             >
               Voir plus
