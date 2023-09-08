@@ -1,12 +1,22 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-export default function FormMovie({ change, addMovie }) {
+export default function FormMovie({
+  addMovie,
+  valuesAllInputs,
+  setMovieLocal,
+}) {
+  const change = (e) => {
+    setMovieLocal({ ...valuesAllInputs, [e.target.name]: e.target.value });
+    // (valuesAllInputs[e.target.name] = e.target.value)
+  };
+
   return (
     <Form>
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
         <Form.Control
-          onChange={change}
+          onChange={(e) => change(e)}
+          value={valuesAllInputs.title}
           type="text"
           placeholder="Titre du film"
           name="title"
@@ -14,16 +24,17 @@ export default function FormMovie({ change, addMovie }) {
       </Form.Group>
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Control
-          onChange={change}
+          onChange={(e) => change(e)}
+          value={valuesAllInputs.description}
           as="textarea"
-          rows={3}
           placeholder="Description du film..."
           name="description"
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Control
-          onChange={change}
+          onChange={(e) => change(e)}
+          value={valuesAllInputs.img}
           type="text"
           placeholder="Image du film"
           name="img"
@@ -31,7 +42,8 @@ export default function FormMovie({ change, addMovie }) {
       </Form.Group>
       <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Control
-          onChange={change}
+          onChange={(e) => change(e)}
+          value={valuesAllInputs.country}
           type="text"
           placeholder="Pays du film"
           name="country"

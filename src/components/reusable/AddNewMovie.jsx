@@ -8,10 +8,6 @@ export default function AddNewMovie() {
   const { update, setUpdate, user } = useContext(UserContext);
   let valuesAllInputs = { title: "", description: "", country: "", img: "" };
 
-  function change(e) {
-    valuesAllInputs[e.target.name] = e.target.value;
-  }
-
   const addMovie = async (e) => {
     e.preventDefault();
     const docRef = await addDoc(collection(db, "movies"), {
@@ -26,7 +22,11 @@ export default function AddNewMovie() {
   return (
     <>
       <div className="my-5 col-8 mx-auto">
-        <FormMovie change={change} addMovie={addMovie} />
+        <FormMovie
+          addMovie={addMovie}
+          valuesAllInputs={valuesAllInputs}
+          setMovieLocal={valuesAllInputs}
+        />
       </div>
     </>
   );

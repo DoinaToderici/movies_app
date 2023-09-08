@@ -91,7 +91,13 @@ export default function ListMovie() {
           return (
             <div className="min-h-full" key={key}>
               {idLocal === item.docId ? (
-                <FormMovie change={resetValueForm} addMovie={setUpdatedMovie} />
+                <FormMovie
+                  change={resetValueForm}
+                  movieLocal={movieLocal}
+                  addMovie={setUpdatedMovie}
+                  valuesAllInputs={movieLocal}
+                  setMovieLocal={setMovieLocal}
+                />
               ) : (
                 <Card
                   item={item}
