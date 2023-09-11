@@ -4,11 +4,12 @@ import ReactPlayer from "react-player";
 export default function About() {
   return (
     <div>
-      <h1 className="text-red-600 underline">
+      <h1 className="text-2xl mb-6 text-center text-orange-700">
         <b>Qui sommes-nous ?</b>
       </h1>
-      <div className="row">
-        <div className="col-6">
+
+      <div className="grid grid-col-2 grid-flow-col gap-4">
+        <div>
           <div>
             <ReactPlayer
               style={{ maxWidth: "100%" }}
@@ -17,9 +18,8 @@ export default function About() {
             />
           </div>
         </div>
-        <div className=" col-6">
-          <h2> BONJOUR, ET BIENVENUE !</h2>
-          <p>
+        <div>
+          <p className="text-orange-400">
             Offrir aux cinéphiles une source pratique et rapide d'informations
             sur le cinéma, tout en facilitant l'accès aux salles, c'est la
             mission d'AlloCiné. AlloCiné peut être joint 24h/24 en quelques
@@ -30,8 +30,6 @@ export default function About() {
           </p>
         </div>
       </div>
-      <hr />
-      <hr />
     </div>
   );
 }

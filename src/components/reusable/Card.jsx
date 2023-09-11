@@ -24,16 +24,17 @@ export default function Card({ item, onDelete, updateForm }) {
 
         <p className="mb-3 text-gray-500">
           {item.description && truncateText(item.description, 100)}
-          {/* {item.description && item.description.length > 100 && ( */}
-          <>
-            <Link
-              to={item.docId}
-              className="mb-3 text-xxs hover:cursor-pointer text-gray-300 underline"
-            >
-              Voir plus
-            </Link>
-          </>
-          {/* )} */}
+          {item.description && item.description.length > 100 && (
+            <>
+              {" "}
+              <Link
+                to={item.docId}
+                className="mb-3 text-xs hover:cursor-pointer text-gray-300 underline"
+              >
+                Voir plus
+              </Link>
+            </>
+          )}
         </p>
       </div>
 
