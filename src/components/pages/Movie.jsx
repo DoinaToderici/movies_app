@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import { Link, useParams } from "react-router-dom";
+import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 
 export default function Movie() {
   const { id } = useParams();
@@ -23,8 +24,8 @@ export default function Movie() {
   return (
     <>
       {singleMovie && (
-        <div className="row">
-          <div className="col-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>
             <div>
               <img
                 src={singleMovie.img}
@@ -33,14 +34,20 @@ export default function Movie() {
               />
             </div>
           </div>
-          <div className="col-6">
+          <div>
             <div>
-              <h1 className="mb-3">{singleMovie.title}</h1>
-              <span className="badge bg-warning mb-5">
+              <h1 className="text-2xl mb-4 text-orange-700">
+                {singleMovie.title}
+              </h1>
+              <span className="badge bg-warning mb-3">
                 {singleMovie.country}
               </span>
               <p>{singleMovie.description}</p>
-              <Link to="/" className="text-warning">
+              <Link
+                to="/"
+                className="d-flex items-center mt-3 text-md hover:cursor-pointer text-gray-300 underline"
+              >
+                <HiOutlineArrowNarrowLeft className="mr-2" />
                 Retour sur la page d'accueil
               </Link>
             </div>

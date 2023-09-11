@@ -19,6 +19,7 @@ export default function About() {
           </div>
         </div>
         <div>
+          <h3 className="text-xl text-orange-700"> Bonjour et bien venue !</h3>
           <p className="text-orange-400">
             Offrir aux cinéphiles une source pratique et rapide d'informations
             sur le cinéma, tout en facilitant l'accès aux salles, c'est la
