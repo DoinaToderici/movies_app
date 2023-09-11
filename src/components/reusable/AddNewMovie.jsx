@@ -1,21 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { db } from "../../firebaseConfig"; // update with your path to firestore config
 import { collection, addDoc, doc } from "firebase/firestore";
 import { UserContext } from "../../context/UserContext";
 import FormMovie from "./FormMovie";
+const EMPTY_DATA_FORM = { title: "", description: "", country: "", img: "" };
 
 export default function AddNewMovie() {
   const { update, setUpdate, user } = useContext(UserContext);
-  let valuesAllInputs = { title: "", description: "", country: "", img: "" };
+  const [newMovie, setNewMovie] = useState(EMPTY_DATA_FORM);
+
+  const handleChange = (e) => {
+    setNewMovie({ ...newMovie, [e.target.name]: e.target.value });
+  };
 
   const addMovie = async (e) => {
     e.preventDefault();
     const docRef = await addDoc(collection(db, "movies"), {
-      ...valuesAllInputs,
+      ...newMovie,
       userId: user.uid,
     });
 
-    valuesAllInputs = { title: "", description: "", country: "", img: "" };
+    setNewMovie(EMPTY_DATA_FORM);
+    // valuesAllInputs = EMPTY_DATA_FORM;
     setUpdate(!update);
   };
 
@@ -23,9 +29,10 @@ export default function AddNewMovie() {
     <>
       <div className="my-5 col-8 mx-auto">
         <FormMovie
-          addMovie={addMovie}
-          valuesAllInputs={valuesAllInputs}
-          setMovieLocal={valuesAllInputs}
+          setMovieToDB={addMovie}
+          valuesAllInputs={newMovie}
+          changeDataMovie={handleChange}
+          textFormButton="Add new movie"
         />
       </div>
     </>

@@ -70,13 +70,13 @@ export default function ListMovie() {
     setMovieLocal(item);
   }
 
-  function resetValueForm(e) {
+  function updateMovieData(e) {
     const cloneMovieLocal = structuredClone(movieLocal);
     cloneMovieLocal[e.target.name] = e.target.value;
     setMovieLocal(cloneMovieLocal);
   }
 
-  const setUpdatedMovie = async (e) => {
+  const setUpdatedMovieToDB = async (e) => {
     e.preventDefault();
     const movieRef = doc(db, "movies", idLocal);
     await updateDoc(movieRef, movieLocal);
@@ -92,11 +92,10 @@ export default function ListMovie() {
             <div className="min-h-full" key={key}>
               {idLocal === item.docId ? (
                 <FormMovie
-                  change={resetValueForm}
-                  movieLocal={movieLocal}
-                  addMovie={setUpdatedMovie}
+                  changeDataMovie={updateMovieData}
                   valuesAllInputs={movieLocal}
-                  setMovieLocal={setMovieLocal}
+                  setMovieToDB={setUpdatedMovieToDB}
+                  textFormButton="Update movie"
                 />
               ) : (
                 <Card
