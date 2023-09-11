@@ -17,29 +17,30 @@ export default function Menu() {
         <ul className="navbar-nav">
           <li className="nav-item me-3">
             <Link to="/" className="text-white">
-              Accueil
+              Home
             </Link>
           </li>
           <li className="nav-item me-3">
             <Link to="/about" className="text-white">
-              Qui sommes-nous
+              About
             </Link>
           </li>
           {isLogged() ? (
             <li className="nav-item">
               <Link
+                to="/conection/login"
                 className="text-white"
                 onClick={() => {
                   handleLogOut();
                 }}
               >
-                Deconnexion
+                Logout
               </Link>
             </li>
           ) : (
             <li className="nav-item">
-              <Link to="/conection/registration" className="text-white">
-                Conection
+              <Link to="/conection/login" className="text-white">
+                Login
               </Link>
             </li>
           )}

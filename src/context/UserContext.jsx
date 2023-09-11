@@ -23,7 +23,7 @@ export const UserContextProvider = ({ children }) => {
     try {
       const userCredential = await methodType(auth, data.email, data.password);
       const userDB = userCredential.user;
-      // setUser(userDB);
+      setUser(userDB);
       navigate("/");
     } catch (error) {
       console.log(error.message);
@@ -58,7 +58,6 @@ export const UserContextProvider = ({ children }) => {
   }, []);
 
   const handleLogOut = () => {
-    sessionStorage.clear();
     setUser(undefined);
   };
 
