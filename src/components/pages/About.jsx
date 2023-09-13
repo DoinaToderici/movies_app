@@ -7,8 +7,7 @@ export default function About() {
       <h1 className="text-2xl mb-6 text-center text-orange-700">
         <b>Qui sommes-nous ?</b>
       </h1>
-
-      <div className="grid grid-col-2 grid-flow-col gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div>
           <div>
             <ReactPlayer
@@ -19,7 +18,6 @@ export default function About() {
           </div>
         </div>
         <div>
-          <h3 className="text-xl text-orange-700"> Bonjour et bien venue !</h3>
           <p className="text-orange-400">
             Offrir aux cinéphiles une source pratique et rapide d'informations
             sur le cinéma, tout en facilitant l'accès aux salles, c'est la

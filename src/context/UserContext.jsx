@@ -61,9 +61,12 @@ export const UserContextProvider = ({ children }) => {
     setUser(undefined);
   };
 
-  function isLogged() {
-    return user && Object.keys(user).length > 0;
-  }
+  const isLogged = () => {
+    if (user && Object.keys(user).length > 0) {
+      return true;
+    }
+    return false;
+  };
 
   // useEffect(() => {
   //   const loggedInUser = localStorage.getItem("user");

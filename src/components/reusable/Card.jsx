@@ -38,7 +38,7 @@ export default function Card({ item, onDelete, updateForm }) {
         </p>
       </div>
 
-      {isLogged && (
+      {isLogged() && (
         <div className="d-flex justify-content-center">
           <button
             onClick={() => {
